@@ -1,0 +1,15 @@
+<html>
+
+<head>
+    <title>Find a blue cup</title>
+</head>
+
+{% block body %}
+    {% for picture_name, lbl, id in pictures %}
+    <img src= {{ picture_name }} width="400">
+    {{ lbl }}, {{ id }}
+    <br>
+    {% endfor %}
+</body>
+{% endblock %}
+</html>
