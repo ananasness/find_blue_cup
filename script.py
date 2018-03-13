@@ -54,14 +54,13 @@ def process_video(video_path):
     i = 0
     while cap.isOpened() and i < 1000:
         i += 1
-        print('loaded: {}'.format(i + 1), end='')
+        print('\rloaded: {}'.format(i + 1), end='')
 
         ret, frame = cap.read()
         if not ret:
             break
 
         frames.append(frame)
-        print(end= '\r')
 
     cap.release()
     print()
@@ -69,7 +68,7 @@ def process_video(video_path):
     rects = ['no cup here' for _ in range(len(frames))]
 
     for i in range(len(frames)):
-        print('processed: {}/{}'.format(i + 1, len(frames)), end='')
+        print('\rprocessed: {}/{}'.format(i + 1, len(frames)), end='')
         im = frames[i].copy()
         rect = find_rect(cv.cvtColor(im, cv.COLOR_BGR2HSV), bound)
         if rect != None:
@@ -77,6 +76,4 @@ def process_video(video_path):
             rects[i] = rect
 
         cv.imwrite('static/res/{}.jpg'.format(i), im)
-        print(end='\r')
-
     pickle.dump(rects, open('./static/rects.p', 'wb'))
