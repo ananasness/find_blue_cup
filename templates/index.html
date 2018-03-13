@@ -7,7 +7,7 @@
 {% block body %}
     {% for picture_name, lbl, id in pictures %}
     <img src= {{ picture_name }} width="400">
-    {{ lbl }}, {{ id }}
+    bounded box: {{ lbl }}, frame number: {{ id }}
     <br>
     {% endfor %}
 </body>

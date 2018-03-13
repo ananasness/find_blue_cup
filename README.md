@@ -12,8 +12,10 @@ $ cd find_blue_cup
 $ virtualenv env
 $ source env/bin/activate
 $ pip3 install -r requirements.txt
-$ python3 app.py
+$ python app.py
 
 ```
 
 After the first run the program processes the video and creates image files in static folder.
+
+Index page shows pairs of frames where the cup appears or disappears. Also page `/all` demonstrates all processed frames.

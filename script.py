@@ -10,7 +10,7 @@ def create_bound_method(frame):
 
     means = color_template.mean(axis=(0, 1))
     stds = color_template.std(axis=(0, 1))
-    coefs = np.array([13, 6, 2])
+    coefs = np.array([13, 5, 2])
     color_bounds = np.array([means - stds * coefs, means + stds * coefs]).T
 
     def bound_method(imm, bounds=color_bounds):
@@ -27,11 +27,10 @@ def create_bound_method(frame):
 
 
 def find_rect(hsv_image, bound):
-    im = hsv_image.copy()
-    im_hsv = cv.GaussianBlur(im, (1, 1), 5)
+    im_hsv = hsv_image.copy()
     bounded = np.array(bound(im_hsv), dtype=np.uint8)
-    bounded = cv.GaussianBlur(bounded, (11, 11), 5)
-    kernel = np.ones((14, 14))
+    bounded = cv.GaussianBlur(bounded, (9, 9), 5)
+    kernel = np.ones((16, 16))
     bounded = cv.morphologyEx(bounded, cv.MORPH_ERODE, kernel)
     im2, contours, hierarchy = cv.findContours(bounded, cv.RETR_CCOMP, cv.CHAIN_APPROX_SIMPLE)
 
@@ -76,4 +75,6 @@ def process_video(video_path):
             rects[i] = rect
 
         cv.imwrite('static/res/{}.jpg'.format(i), im)
+
+    print()
     pickle.dump(rects, open('./static/rects.p', 'wb'))
