@@ -51,7 +51,7 @@ def process_video(video_path):
     cap = cv.VideoCapture(video_path)
     frames = []
     i = 0
-    while cap.isOpened() and i < 1000:
+    while True:
         i += 1
         print('\rloaded: {}'.format(i + 1), end='')
 
@@ -63,6 +63,7 @@ def process_video(video_path):
 
     cap.release()
     print()
+
     bound = create_bound_method(frames[51])
     rects = ['no cup here' for _ in range(len(frames))]
 
@@ -77,4 +78,4 @@ def process_video(video_path):
         cv.imwrite('static/res/{}.jpg'.format(i), im)
 
     print()
-    pickle.dump(rects, open('./static/rects.p', 'wb'))
+    pickle.dump(rects, open('static/rects.p', 'wb'))

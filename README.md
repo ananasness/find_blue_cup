@@ -9,9 +9,9 @@ The project consists of script for video frames processing (using OpenCV) and fo
 
 $ git clone https://github.com/ananasness/find_blue_cup
 $ cd find_blue_cup
-$ virtualenv env
+$ virtualenv -p python3 env
 $ source env/bin/activate
-$ pip3 install -r requirements.txt
+$ pip install -r requirements.txt
 $ python app.py
 
 ```
